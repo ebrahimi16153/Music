@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Music</string>
+    <string name="btn_back">btn Back</string>
+    <string name="button_menu">button_menu</string>
+    <string name="playing_now">PLAYING NOW</string>
+    <string name="covermusic">coverMusic</string>
+    <string name="music_title">Low Life</string>
+    <string name="artist_name">Future ft. The Weeknd</string>
+    <string name="currentTime">02:36</string>
+    <string name="totalTime">04:36</string>
+    <string name="background_btn_play">background Btn play</string>
+    <string name="btnPrevios">back to Previos Music</string>
+    <string name="next_music">Next music</string>
+    <string name="play_icon">play icon</string>
+    <string name="pause_icon">pause icon</string>
+    <string name="morebtn">moreBtn</string>
+    <string name="favbtn">favBtn</string>
+    <string name="evol_future">EVOL - Future</string>
+    <string name="lose_yourself">lose yourself</string>
+    <string name="row_play_btn">row play btn</string>
+</resources>
