@@ -24,15 +24,7 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
         setContentView(binding.root)
 
         presenter = MusicListPresenterImpl(this,this)
-
-        // check permission
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            presenter.setList()
-
-
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 2723)
-        }
+        presenter.setList()
 
 
 
@@ -53,17 +45,5 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     }
 
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == 2723 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-            presenter.setList()
-        }
-    }
 
 }
