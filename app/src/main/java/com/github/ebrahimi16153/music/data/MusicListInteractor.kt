@@ -7,6 +7,7 @@ import android.provider.MediaStore
 class MusicListInteractor(private val context: Context) {
 
 
+    @SuppressLint("Recycle")
     fun getListOfMusic(): MutableList<MusicFile> {
 
         val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
@@ -37,7 +38,7 @@ class MusicListInteractor(private val context: Context) {
                 /*  StaticData.musicCount++ save  how many music is ArrayList - > int */
 
 
-
+                StaticData.musicCount++
                 songs.add(
 
                     MusicFile(

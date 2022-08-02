@@ -1,12 +1,15 @@
 package com.github.ebrahimi16153.music.data.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ebrahimi16153.music.data.MusicFile
+import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
+import com.github.ebrahimi16153.music.playingnow.PlayingNow
 
 class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
 
@@ -50,6 +53,16 @@ class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
         fun setViews(item: MusicFile) {
             binding.titleRowMusic.text = item.title
             binding.artistRowMusic.text = item.artist
+            binding.root.setOnClickListener {
+                StaticData.position = layoutPosition
+                binding.root.context.startActivity(
+                    Intent(
+                        binding.root.context,
+                        PlayingNow::class.java
+                    )
+                )
+
+            }
         }
     }
 
