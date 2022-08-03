@@ -16,7 +16,7 @@ interface MusicListContract {
         fun setList()
 
         fun setError(string: String)
-
+        fun goToPlayingNow()
 
     }
 

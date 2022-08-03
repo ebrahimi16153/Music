@@ -26,7 +26,9 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
         presenter = MusicListPresenterImpl(this,this)
         presenter.setList()
 
-
+          binding.cardViewCoverMusicLib.setOnClickListener {
+              presenter.goToPlayingNow()
+          }
 
     }
 
@@ -43,6 +45,7 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     override fun showError(string: String) {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
+
 
 
 

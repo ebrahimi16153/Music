@@ -9,6 +9,7 @@ class StaticData {
         var musicList = mutableListOf<MusicFile>()
         var position = 0
         var musicCount = 0
+        var playingNow = false
 
 
     }

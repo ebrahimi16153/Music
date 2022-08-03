@@ -103,7 +103,7 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
 
                 while (current < max) {
                     try {
-                        Thread.sleep(100)
+                        Thread.sleep(500)
                         current = StaticData.mp.currentPosition
                         binding.progress.progress = current
 
