@@ -10,18 +10,18 @@ import com.github.ebrahimi16153.music.databinding.ActivitySplashBinding
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
 import com.github.ebrahimi16153.music.musiclist.MusicList
 
-class Splash : AppCompatActivity(),MotionLayout.TransitionListener {
+class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
 
     //binding
-    private lateinit var binding:ActivitySplashBinding
+    private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      // motion layout Listener
-     binding.root.addTransitionListener(this)
+        // motion layout Listener
+        binding.root.addTransitionListener(this)
 
     }
 
@@ -41,7 +41,7 @@ class Splash : AppCompatActivity(),MotionLayout.TransitionListener {
     override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-                 goMusicLit()
+            goMusicLit()
 
         } else {
             requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 2723)
@@ -59,7 +59,6 @@ class Splash : AppCompatActivity(),MotionLayout.TransitionListener {
     }
 
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -68,14 +67,14 @@ class Splash : AppCompatActivity(),MotionLayout.TransitionListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == 2723 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-               goMusicLit()
+            goMusicLit()
         }
     }
 
 
-    private fun goMusicLit(){
-        startActivity(Intent(this,MusicList::class.java))
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_in)
+    private fun goMusicLit() {
+        startActivity(Intent(this, MusicList::class.java))
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_in)
         finish()
     }
 }

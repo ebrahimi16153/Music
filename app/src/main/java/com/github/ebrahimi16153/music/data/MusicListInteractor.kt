@@ -38,7 +38,6 @@ class MusicListInteractor(private val context: Context) {
                 /*  StaticData.musicCount++ save  how many music is ArrayList - > int */
 
 
-                StaticData.musicCount++
                 songs.add(
 
                     MusicFile(
@@ -53,7 +52,9 @@ class MusicListInteractor(private val context: Context) {
                 )
             }
         }
+        StaticData.musicCount = songs.size
         return songs
+
     }
 
 

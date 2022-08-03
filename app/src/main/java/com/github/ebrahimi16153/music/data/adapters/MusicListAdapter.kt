@@ -55,13 +55,7 @@ class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
             binding.artistRowMusic.text = item.artist
             binding.root.setOnClickListener {
                 StaticData.position = layoutPosition
-                binding.root.context.startActivity(
-                    Intent(
-                        binding.root.context,
-                        PlayingNow::class.java
-                    )
-                )
-
+                binding.root.context.startActivity(Intent(binding.root.context,PlayingNow::class.java))
             }
         }
     }
