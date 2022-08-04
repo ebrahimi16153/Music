@@ -15,6 +15,8 @@ class MusicListPresenterImpl(private val context: Context, private val view:Musi
             StaticData.musicList = musicData.getListOfMusic()
         }
         view.showList()
+        view.setCoverMusic()
+        view.updateMeta()
     }
 
     override fun setError(string: String) {

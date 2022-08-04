@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.databinding.ActivitySplashBinding
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
 import com.github.ebrahimi16153.music.musiclist.MusicList
@@ -74,7 +75,7 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
 
     private fun goMusicLit() {
         startActivity(Intent(this, MusicList::class.java))
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_in)
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.slide_out_right)
         finish()
     }
 }

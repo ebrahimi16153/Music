@@ -12,16 +12,19 @@ class PlayingNowPresenterImpl(
 ) : PlayingNowContract.PlayingNowPresenter {
 
     // play music when playingNow Activity is stared
-    override fun playMusic() {
+    override fun playMusic(fromList:String) {
         StaticData.apply {
-            if (mp.isPlaying) {
+            if (mp.isPlaying && fromList == "yes") {
 
                 mp.stop()
                 mp.release()
+                mp = MediaPlayer.create(context, Uri.parse(musicList[position].data))
+                mp.start()
 
+            }else if (!mp.isPlaying && fromList == "yes") {
+                mp = MediaPlayer.create(context, Uri.parse(musicList[position].data))
+                mp.start()
             }
-            mp = MediaPlayer.create(context, Uri.parse(musicList[position].data))
-            mp.start()
             view.updateMeta()
             view.updateSeekBar()
             view.setCoverMusic()
@@ -64,7 +67,7 @@ class PlayingNowPresenterImpl(
 //            mp = MediaPlayer.create(context,Uri.parse(StaticData.musicList[position].data))
 //            mp.start()
 
-            playMusic()
+            playMusic("yes")
             autoNextMusic()
         }
 
@@ -78,7 +81,7 @@ class PlayingNowPresenterImpl(
             } else {
                 position--
             }
-            playMusic()
+            playMusic("yes")
         }
         autoNextMusic()
 

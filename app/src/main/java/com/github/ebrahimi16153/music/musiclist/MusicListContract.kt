@@ -6,15 +6,17 @@ interface MusicListContract {
 
     interface MusicListView{
 
+
         fun showList()
         fun showError(string: String)
+        fun setCoverMusic()
+        fun updateMeta()
     }
 
 
     interface MusicListPresenter{
 
         fun setList()
-
         fun setError(string: String)
         fun goToPlayingNow()
 

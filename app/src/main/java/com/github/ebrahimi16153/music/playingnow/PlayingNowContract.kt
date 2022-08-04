@@ -15,7 +15,7 @@ interface PlayingNowContract {
 
     interface PlayingNowPresenter {
 
-        fun playMusic()
+        fun playMusic(fromList:String)
         fun btnPlayMusic(context: Context)
         fun btnNextMusic()
         fun btnPreviousMusic()

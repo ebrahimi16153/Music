@@ -15,14 +15,20 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
     //binding
     private var flag = false
     private lateinit var binding: ActivityPlayingNowBinding
+
+    // onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayingNowBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
         val presenter = PlayingNowPresenterImpl(this, this)
 
         // play music
-        presenter.playMusic()
+        val key = intent.getStringExtra("fromList")?:"no"
+        presenter.playMusic(key)
 
         //btn play
         binding.btnPlay.setOnClickListener {
@@ -58,6 +64,7 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
         })
 
     }
+
 
     // set play and pause BtnPLay
     override fun showBtnPlayAnimation() {
