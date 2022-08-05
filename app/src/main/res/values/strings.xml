@@ -18,4 +18,8 @@
     <string name="evol_future">EVOL - Future</string>
     <string name="lose_yourself">lose yourself</string>
     <string name="row_play_btn">row play btn</string>
+    <string name="fragment_album">fragment Album</string>
+    <string name="fragment_alltrack">fragment AllTrack</string>
+    <string name="fragment_artist">fragment Artist</string>
+
 </resources>
