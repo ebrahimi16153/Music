@@ -4,15 +4,15 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/album"
+        motion:constraintSetStart="@id/tracks"
         motion:duration="500"
         motion:autoTransition="animateToEnd">
        <KeyFrameSet>
        </KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/tracks">
         <Constraint
             android:id="@+id/icon"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,10 @@
             motion:layout_constraintStart_toStartOf="parent"
             android:scaleX="0"
             android:scaleY="0"
-            android:rotation="-360" />
+            android:rotation="0" />
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/album">
         <Constraint
             android:id="@+id/icon"
             motion:layout_constraintEnd_toEndOf="parent"

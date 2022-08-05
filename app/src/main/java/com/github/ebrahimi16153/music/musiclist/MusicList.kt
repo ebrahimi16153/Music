@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData

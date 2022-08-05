@@ -2,7 +2,9 @@ package com.github.ebrahimi16153.music.data.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -59,6 +61,8 @@ class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
                 intent.putExtra("fromList","yes")
                 binding.root.context.startActivity(intent)
             }
+
+
         }
     }
 
