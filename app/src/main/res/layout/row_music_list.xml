@@ -10,7 +10,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="75dp"
         android:id="@+id/guidelineVertical"/>
-       <androidx.cardview.widget.CardView
+       <androidx.constraintlayout.widget.ConstraintLayout
            android:elevation="0dp"
            android:layout_width="0dp"
            android:layout_height="0dp"
@@ -33,7 +33,7 @@
                    android:id="@+id/titleRowMusic"
                    android:text="@string/lose_yourself"
                    android:textColor="@color/text"
-                   android:textSize="19dp"
+                   android:textSize="16sp"
                    android:layout_marginVertical="5dp"
                    app:layout_constraintTop_toTopOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
@@ -50,17 +50,10 @@
                    app:layout_constraintTop_toBottomOf="@+id/titleRowMusic"
                    android:textColor="@color/text"/>
 
-               <View
-                   android:layout_width="0dp"
-                   android:layout_height="2dp"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   android:background="@color/lightShadow"/>
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 
-       </androidx.cardview.widget.CardView>
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <soup.neumorphism.NeumorphImageButton
@@ -81,13 +74,5 @@
         app:neumorph_shadowElevation="5dp" />
 
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/lightShadow"
-        android:layout_marginHorizontal="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

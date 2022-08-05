@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topMusicPlayer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.tabs.TabLayout
@@ -131,22 +131,16 @@
         app:layout_constraintTop_toBottomOf="@id/topMusicPlayer" />
 
     <View
+        android:rotation="180"
         android:id="@+id/tabLayShadow"
         android:layout_width="0dp"
         android:layout_height="10dp"
-        android:background="@drawable/shadow_tab_lay_light"
+        android:background="@drawable/shadow_tab_lay_dark"
         app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <View
-        android:id="@+id/tabLayShadowDark"
-        android:layout_width="0dp"
-        android:layout_height="10dp"
-        android:background="@drawable/shadow_tab_lay_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topMusicPlayer" />
+
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
