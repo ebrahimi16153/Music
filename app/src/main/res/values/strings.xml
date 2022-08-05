@@ -21,5 +21,6 @@
     <string name="fragment_album">fragment Album</string>
     <string name="fragment_alltrack">fragment AllTrack</string>
     <string name="fragment_artist">fragment Artist</string>
+    <string name="musiclibrytabs">MusicLibryTabs</string>
 
 </resources>

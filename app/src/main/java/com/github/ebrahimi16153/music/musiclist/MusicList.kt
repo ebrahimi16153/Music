@@ -26,7 +26,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     private lateinit var binding: ActivityMusicListBinding
     private lateinit var presenter: MusicListContract.MusicListPresenter
-    private val musicListAdapter by lazy { MusicListAdapter() }
 
     //on Create
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +33,11 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
         binding = ActivityMusicListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = MusicListPresenterImpl(this, this)
-        presenter.setList()
 
+       // init presenter
+        presenter = MusicListPresenterImpl(this,this)
+        presenter.setTabs()
+        presenter.updateMetaData(binding.coverMusicLib,binding.musicLibTitle)
 
         binding.apply {
             cardViewCoverMusicLib.setOnClickListener {
@@ -48,34 +49,19 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
 
         }
 
-
-        // tab implement
-//        binding.apply {
-//            tabLayout.addTab(
-//                tabLayout.newTab().setText("Musics").setIcon(R.drawable.ic_round_music_note_24)
-//            )
-//            tabLayout.addTab(
-//                tabLayout.newTab().setText("Album").setIcon(R.drawable.ic_round_album_24)
-//            )
-//            tabLayout.addTab(
-//                tabLayout.newTab().setText("Artist").setIcon(R.drawable.ic_round_person_24)
-//            )
-//        }
+        StaticData.motionLayout = binding.root
 
 
-//      binding.viewPager.adapter = FmPagerAdapter(this,supportFragmentManager,binding.tabLayout.tabCount)
 
+    }
 
-//        binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
-//        binding.tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                binding.viewPager.currentItem = tab!!.position
-//            }
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-//            override fun onTabReselected(tab: TabLayout.Tab?) {}
-//        })
+    override fun onRestart() {
+        super.onRestart()
+        presenter.updateMetaData(binding.coverMusicLib,binding.musicLibTitle)
+    }
 
-
+    // implement tabLayout and page view
+    override fun setTabs() {
         val listOfFragment: ArrayList<Fragment> = arrayListOf(
             AllTrack(), AlbumMusic(), ArtistMusic()
         )
@@ -101,46 +87,8 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     }
 
 
-    // on restart
-    override fun onRestart() {
-        super.onRestart()
-        presenter = MusicListPresenterImpl(this, this)
-        presenter.setList()
-    }
 
-    override fun showList() {
-//        if (StaticData.musicList.isNotEmpty()) {
-//            musicListAdapter.diff.submitList(StaticData.musicList)
-//            binding.recyclerTrack.adapter = musicListAdapter
-//            binding.recyclerTrack.layoutManager = LinearLayoutManager(this)
-//        } else {
-//            presenter.setError("list is empty")
-//        }
-    }
-
-    override fun showError(string: String) {
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun setCoverMusic() {
-        val mmr = MediaMetadataRetriever()
-        mmr.setDataSource(StaticData.musicList[StaticData.position].data)
-        val data = mmr.embeddedPicture
-
-        if (data != null) {
-            val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
-            binding.coverMusicLib.setImageBitmap(bitmap)
-            binding.coverMusicLib.scaleType = ImageView.ScaleType.CENTER_CROP
-        } else {
-            binding.coverMusicLib.setImageResource(R.drawable.cover)
-            binding.coverMusicLib.scaleType = ImageView.ScaleType.FIT_CENTER
-
-        }
-    }
-
-    override fun updateMeta() {
-        binding.musicLibTitle.text = StaticData.musicList[StaticData.position].title
-    }
+    // set cover music
 
 
 }

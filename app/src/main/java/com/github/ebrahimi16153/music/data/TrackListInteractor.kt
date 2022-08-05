@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.MediaStore
 
-class MusicListInteractor(private val context: Context) {
+class TrackListInteractor(private val context: Context) {
 
 
     @SuppressLint("Recycle")

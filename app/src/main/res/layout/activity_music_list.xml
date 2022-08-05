@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root"
+    app:nestedScrollFlags="disableScroll"
     android:background="@color/background"
+    app:layoutDescription="@xml/activity_music_list_scene"
     tools:context=".musiclist.MusicList">
 
     <TextView
@@ -100,26 +103,18 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/recyclerTrack"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginVertical="10dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/topMusicPlayer" />-->
 
     <com.google.android.material.tabs.TabLayout
-        app:tabIconTint="@color/text"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
+        android:contentDescription="@string/musiclibrytabs"
         android:scrollIndicators="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:tabIconTint="@color/text"
         app:tabIndicatorColor="@color/gradientOne"
         app:tabRippleColor="@color/gradientTwo"
         app:tabSelectedTextColor="@color/gradientOne"
@@ -136,13 +131,22 @@
         app:layout_constraintTop_toBottomOf="@id/topMusicPlayer" />
 
     <View
-        android:background="@drawable/shadow_tab_lay"
         android:id="@+id/tabLayShadow"
         android:layout_width="0dp"
         android:layout_height="10dp"
+        android:background="@drawable/shadow_tab_lay_light"
         app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <View
+        android:id="@+id/tabLayShadowDark"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="@drawable/shadow_tab_lay_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMusicPlayer" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

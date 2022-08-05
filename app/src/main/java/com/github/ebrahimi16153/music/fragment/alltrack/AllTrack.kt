@@ -1,17 +1,21 @@
 package com.github.ebrahimi16153.music.fragment.alltrack
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.ebrahimi16153.music.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.ebrahimi16153.music.data.StaticData
+import com.github.ebrahimi16153.music.data.adapters.MusicListAdapter
 import com.github.ebrahimi16153.music.databinding.FragmentAllTrackBinding
+import com.github.ebrahimi16153.music.helper.CustomScrollListener
 
 
-class AllTrack : Fragment() {
+class AllTrack : Fragment(),TrackContract.TrackView {
     private lateinit var binding:FragmentAllTrackBinding
-
+    private  lateinit var  presenter: TrackContract.TrackPresenter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +27,30 @@ class AllTrack : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //implement views
+        // init presenter
+        presenter = TrackPresenterImpl(requireContext(),this)
+        presenter.getList()
+
+
+    }
+
+    override fun setList() {
+
+        binding.apply {
+            val trackAdapter = MusicListAdapter()
+            trackAdapter.diff.submitList(StaticData.musicList)
+            recyclerTrack.adapter = trackAdapter
+            recyclerTrack.layoutManager = LinearLayoutManager(requireContext())
+
+        }
+
+        binding.recyclerTrack.addOnScrollListener(CustomScrollListener())
+
+
+    }
+
+    override fun onError(massage: String) {
+        Toast.makeText(requireContext(), massage, Toast.LENGTH_SHORT).show()
     }
 
 
