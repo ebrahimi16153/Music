@@ -1,9 +1,8 @@
 package com.github.ebrahimi16153.music.data
 
-import android.content.Context
 import android.media.MediaPlayer
 import androidx.constraintlayout.motion.widget.MotionLayout
-import com.github.ebrahimi16153.music.data.MusicFile
+import com.github.ebrahimi16153.music.data.model.MusicFile
 
 class StaticData {
     companion object{
@@ -12,7 +11,11 @@ class StaticData {
         var musicList = mutableListOf<MusicFile>()
         var position = 0
         var musicCount = 0
+        var albumList = mutableListOf<String>()
         lateinit var motionLayout: MotionLayout
+        val currentAlbum = mutableListOf<MusicFile>()
+        lateinit var motionLayoutAlbum:MotionLayout
+
 
     }
 }

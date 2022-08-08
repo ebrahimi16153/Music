@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.model.MusicFile
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
 import com.github.ebrahimi16153.music.playingnow.PlayingNow
 
-class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
+class CurrentPlayListAdapter : RecyclerView.Adapter<CurrentPlayListAdapter.ViewHolder>() {
 
 
     //DiffUtil
@@ -53,15 +54,7 @@ class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
         fun setViews(item: MusicFile) {
             binding.titleRowMusic.text = item.title
             binding.artistRowMusic.text = item.artist
-            binding.root.setOnClickListener {
-                StaticData.position = layoutPosition
-                val intent = Intent(binding.root.context,PlayingNow::class.java)
-                intent.putExtra("fromList","yes")
-                binding.root.context.startActivity(intent)
+
             }
-
-
         }
     }
-
-}
