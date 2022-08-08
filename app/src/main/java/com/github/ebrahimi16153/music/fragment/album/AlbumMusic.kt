@@ -11,6 +11,7 @@ import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.AlbumAdapter
 import com.github.ebrahimi16153.music.data.adapters.CurrentPlayListAdapter
 import com.github.ebrahimi16153.music.databinding.FragmentAlbumMusicBinding
+import com.github.ebrahimi16153.music.helper.CustomScrollListener
 
 
 class AlbumMusic : Fragment(),AlbumContract.AlbumView {
@@ -32,6 +33,7 @@ class AlbumMusic : Fragment(),AlbumContract.AlbumView {
         presenter = AlbumPresenterImpl(requireContext(),this)
         presenter.getList()
 
+       binding.listAlbum.addOnScrollListener(CustomScrollListener())
     }
 
     override fun setList() {

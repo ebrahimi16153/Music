@@ -44,7 +44,7 @@ class AllTrack : Fragment(),TrackContract.TrackView {
 
         }
 
-        binding.recyclerTrack.addOnScrollListener(CustomScrollListener())
+        binding.recyclerTrack.addOnScrollListener(StaticData.recyclerAnim)
 
 
     }

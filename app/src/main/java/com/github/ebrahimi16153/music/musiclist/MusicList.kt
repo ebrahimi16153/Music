@@ -52,9 +52,19 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
         StaticData.motionLayout = binding.root
 
 
-
     }
 
+    override fun onBackPressed() {
+
+        if (StaticData.motionLayoutAlbum.currentState == R.id.end){
+            StaticData.apply {
+                motionLayoutAlbum.setTransition(R.id.end,R.id.start)
+                motionLayoutAlbum.transitionToEnd()
+            }
+        }else{
+            finish()
+        }
+    }
     override fun onRestart() {
         super.onRestart()
         presenter.updateMetaData(binding.coverMusicLib,binding.musicLibTitle)

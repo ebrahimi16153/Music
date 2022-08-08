@@ -59,6 +59,7 @@ class TrackListInteractor(private val context: Context) {
 
         }
         StaticData.albumList = album.toSet().toList().toMutableList()
+        StaticData.albumList.sort()
         return songs
 
     }
