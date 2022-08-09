@@ -4,7 +4,7 @@ import com.github.ebrahimi16153.music.data.StaticData
 
 class ArtistPresenterImpl(val view:ArtistContract.ArtistView):ArtistContract.ArtistPresenter {
     override fun getList() {
-        if (StaticData.albumList.isEmpty()){
+        if (StaticData.stringAlbumList.isEmpty()){
             view.setList()
         }else{
             view.onError("Music list is Empty")

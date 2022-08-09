@@ -11,7 +11,6 @@ import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.AlbumAdapter
 import com.github.ebrahimi16153.music.data.adapters.CurrentPlayListAdapter
 import com.github.ebrahimi16153.music.databinding.FragmentAlbumMusicBinding
-import com.github.ebrahimi16153.music.helper.CustomScrollListener
 
 
 class AlbumMusic : Fragment(),AlbumContract.AlbumView {
@@ -37,16 +36,22 @@ class AlbumMusic : Fragment(),AlbumContract.AlbumView {
     }
 
     override fun setList() {
-       val adapter = AlbumAdapter()
-        adapter.diff.submitList(StaticData.albumList)
+//       val adapter = AlbumAdapter()
+//        adapter.diff.submitList(StaticData.stringAlbumList)
+//        binding.listAlbum.adapter = adapter
+//        binding.listAlbum.layoutManager = LinearLayoutManager(requireContext())
+
+
+        val adapter = AlbumAdapter()
+        val list = StaticData.albumList
+        adapter.diff.submitList(list)
         binding.listAlbum.adapter = adapter
         binding.listAlbum.layoutManager = LinearLayoutManager(requireContext())
 
-
-        val trackAdapter = CurrentPlayListAdapter()
-        trackAdapter.diff.submitList(StaticData.currentAlbum)
-        binding.trackCurrentAlbumList.adapter = trackAdapter
-        binding.trackCurrentAlbumList.layoutManager =LinearLayoutManager(requireContext())
+//        val trackAdapter = CurrentPlayListAdapter()
+//        trackAdapter.diff.submitList(StaticData.currentAlbum)
+//        binding.trackCurrentAlbumList.adapter = trackAdapter
+//        binding.trackCurrentAlbumList.layoutManager =LinearLayoutManager(requireContext())
     }
 
     override fun onError(massage: String) {

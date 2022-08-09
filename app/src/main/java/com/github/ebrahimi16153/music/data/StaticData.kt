@@ -2,6 +2,7 @@ package com.github.ebrahimi16153.music.data
 
 import android.media.MediaPlayer
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.github.ebrahimi16153.music.data.model.AlbumMusic
 import com.github.ebrahimi16153.music.data.model.MusicFile
 import com.github.ebrahimi16153.music.helper.CustomScrollListener
 
@@ -12,7 +13,8 @@ class StaticData {
         var musicList = mutableListOf<MusicFile>()
         var position = 0
         var musicCount = 0
-        var albumList = mutableListOf<String>()
+        var stringAlbumList = mutableListOf<String>()
+        var albumList = mutableListOf<AlbumMusic>()
         val currentAlbum = mutableListOf<MusicFile>()
         var artistList = mutableListOf<String>()
         val currentArtist = mutableListOf<MusicFile>()

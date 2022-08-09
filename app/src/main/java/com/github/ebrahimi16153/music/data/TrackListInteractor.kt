@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.MediaStore
 import android.util.Log
+import com.github.ebrahimi16153.music.data.model.AlbumMusic
 import com.github.ebrahimi16153.music.data.model.MusicFile
 
 class TrackListInteractor(private val context: Context) {
@@ -63,14 +64,50 @@ class TrackListInteractor(private val context: Context) {
         }
         StaticData.artistList = artist.toSet().toList().toMutableList()
         StaticData.artistList.sort()
-        StaticData.albumList = album.toSet().toList().toMutableList()
-        StaticData.albumList.sort()
-
         return songs
 
     }
 
+    @SuppressLint("Recycle")
+    fun getAlbum(): MutableList<AlbumMusic> {
+        val selection = MediaStore.Audio.Media.ALBUM+ " != 0"
+
+        val projection = arrayOf(
+            MediaStore.Audio.Albums.ALBUM_ID,
+            MediaStore.Audio.Albums.ALBUM,
+            MediaStore.Audio.Albums.ARTIST,
+            MediaStore.Audio.Albums.ALBUM,
+            MediaStore.Audio.Albums.NUMBER_OF_SONGS
 
 
+        )
 
+
+        val cursor = context.contentResolver.query(
+            MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+            projection,
+            selection,
+            null,
+            MediaStore.Audio.Media.ALBUM + " ASC"
+        )
+        val album = mutableListOf<AlbumMusic>()
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+
+                album.add(
+
+                    AlbumMusic(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+
+                        )
+                )
+            }
+        }
+
+        return album
+    }
 }
