@@ -1,6 +1,5 @@
 package com.github.ebrahimi16153.music.data.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -8,39 +7,39 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData
-import com.github.ebrahimi16153.music.databinding.AlbumItemBinding
+import com.github.ebrahimi16153.music.databinding.ArtistItemBinding
 
-class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+class ArtistAdapter: RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
 
-    private val differCallBack = object :DiffUtil.ItemCallback<String>(){
+    private val differCallBack = object : DiffUtil.ItemCallback<String>(){
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-          return  oldItem == newItem
+            return  oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-          return oldItem == newItem
+            return oldItem == newItem
         }
 
     }
 
-   val diff = AsyncListDiffer(this,differCallBack)
+    val diff = AsyncListDiffer(this,differCallBack)
 
-    inner class ViewHolder(private val binding: AlbumItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ArtistItemBinding): RecyclerView.ViewHolder(binding.root){
 
         fun setView(item:String){
-            binding.albumName.text = item
+            binding.artistName.text = item
             binding.root.setOnClickListener {
-                StaticData.currentAlbum.clear()
+                StaticData.currentArtist.clear()
                 StaticData.musicList.forEach(){
-                    if (it.albume == item){
+                    if (it.artist == item){
 
-                        StaticData.currentAlbum.add(it)
+                        StaticData.currentArtist.add(it)
 
                         StaticData.apply {
-                            if (motionLayoutAlbum.currentState == R.id.start){
-                                motionLayoutAlbum.setTransition(R.id.start, R.id.end)
-                                motionLayoutAlbum.transitionToEnd()
+                            if (motionLayoutArtist.currentState == R.id.start){
+                                motionLayoutArtist.setTransition(R.id.start, R.id.end)
+                                motionLayoutArtist.transitionToEnd()
                             }
                         }
                     }
@@ -51,15 +50,14 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(AlbumItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(ArtistItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.setView(diff.currentList[position])
+        holder.setView(diff.currentList[position])
     }
 
     override fun getItemCount() = diff.currentList.size

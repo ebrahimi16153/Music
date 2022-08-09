@@ -13,10 +13,14 @@ class StaticData {
         var position = 0
         var musicCount = 0
         var albumList = mutableListOf<String>()
-        lateinit var motionLayout: MotionLayout
         val currentAlbum = mutableListOf<MusicFile>()
+        var artistList = mutableListOf<String>()
+        val currentArtist = mutableListOf<MusicFile>()
         lateinit var motionLayoutAlbum:MotionLayout
+        lateinit var motionLayoutArtist: MotionLayout
+        lateinit var motionLayout: MotionLayout
         val recyclerAnim = CustomScrollListener()
+
 
 
     }

@@ -33,7 +33,7 @@ class AlbumMusic : Fragment(),AlbumContract.AlbumView {
         presenter = AlbumPresenterImpl(requireContext(),this)
         presenter.getList()
 
-       binding.listAlbum.addOnScrollListener(CustomScrollListener())
+       binding.listAlbum.addOnScrollListener(StaticData.recyclerAnim)
     }
 
     override fun setList() {

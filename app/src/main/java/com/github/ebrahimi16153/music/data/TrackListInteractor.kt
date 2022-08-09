@@ -3,6 +3,7 @@ package com.github.ebrahimi16153.music.data
 import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.MediaStore
+import android.util.Log
 import com.github.ebrahimi16153.music.data.model.MusicFile
 
 class TrackListInteractor(private val context: Context) {
@@ -35,6 +36,7 @@ class TrackListInteractor(private val context: Context) {
 
         val songs = mutableListOf<MusicFile>()
         val album = mutableListOf<String>()
+        val artist = mutableListOf<String>()
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 /*  StaticData.musicCount++ save  how many music is ArrayList - > int */
@@ -54,15 +56,21 @@ class TrackListInteractor(private val context: Context) {
                 )
 
                 album.add(cursor.getString(4))
+                artist.add(cursor.getString(1))
 
             }
 
         }
+        StaticData.artistList = artist.toSet().toList().toMutableList()
+        StaticData.artistList.sort()
         StaticData.albumList = album.toSet().toList().toMutableList()
         StaticData.albumList.sort()
+
         return songs
 
     }
+
+
 
 
 }

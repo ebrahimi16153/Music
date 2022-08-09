@@ -1,26 +1,16 @@
 package com.github.ebrahimi16153.music.musiclist
 
 import android.content.res.Resources
-import android.graphics.BitmapFactory
-import android.media.MediaMetadataRetriever
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TableLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.FmPagerAdapter
-import com.github.ebrahimi16153.music.data.adapters.MusicListAdapter
 import com.github.ebrahimi16153.music.databinding.ActivityMusicListBinding
 import com.github.ebrahimi16153.music.fragment.album.AlbumMusic
 import com.github.ebrahimi16153.music.fragment.alltrack.AllTrack
 import com.github.ebrahimi16153.music.fragment.artist.ArtistMusic
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
@@ -56,18 +46,30 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
 
     override fun onBackPressed() {
 
-        if (StaticData.motionLayoutAlbum.currentState == R.id.end){
-            StaticData.apply {
-                motionLayoutAlbum.setTransition(R.id.end,R.id.start)
-                motionLayoutAlbum.transitionToEnd()
+        if (StaticData.motionLayoutAlbum.currentState == R.id.end || StaticData.motionLayoutArtist.currentState == R.id.end) {
+
+            if (StaticData.motionLayoutAlbum.currentState == R.id.end) {
+                StaticData.apply {
+                    motionLayoutAlbum.setTransition(R.id.end, R.id.start)
+                    motionLayoutAlbum.transitionToEnd()
+                }
             }
-        }else{
+
+            if (StaticData.motionLayoutArtist.currentState == R.id.end) {
+                StaticData.apply {
+                    motionLayoutArtist.setTransition(R.id.end, R.id.start)
+                    motionLayoutArtist.transitionToEnd()
+                }
+            }
+
+        } else {
             finish()
         }
     }
+
     override fun onRestart() {
         super.onRestart()
-        presenter.updateMetaData(binding.coverMusicLib,binding.musicLibTitle)
+        presenter.updateMetaData(binding.coverMusicLib, binding.musicLibTitle)
     }
 
     // implement tabLayout and page view
