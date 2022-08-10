@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.github.ebrahimi16153.music.R
+import com.github.ebrahimi16153.music.data.StaticData
+import com.github.ebrahimi16153.music.data.TrackListInteractor
 import com.github.ebrahimi16153.music.databinding.ActivitySplashBinding
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
 import com.github.ebrahimi16153.music.musiclist.MusicList
@@ -74,6 +76,13 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
 
 
     private fun goMusicLit() {
+        val  data = TrackListInteractor(this)
+        if ( data.getListOfMusic().isNotEmpty()){
+            StaticData.musicList.addAll(data.getListOfMusic())
+        }
+        if (data.getAlbum().isNotEmpty()){
+            StaticData.albumList.addAll(data.getAlbum())
+        }
         startActivity(Intent(this, MusicList::class.java))
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.slide_out_right)
         finish()

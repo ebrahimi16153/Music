@@ -1,6 +1,10 @@
 package com.github.ebrahimi16153.music.data.model
 
-data class AlbumMusic(val id:String,val album:String, val artist:String,val AlbumArt:String,val numberOfSongs:String)
+import android.graphics.Bitmap
+import android.net.Uri
+import java.io.ByteArrayOutputStream
+
+data class AlbumMusic(val album:String, val artist:String, val cover: ByteArray)
 
 
 //MediaStore.Audio.Albums.ALBUM_ID,

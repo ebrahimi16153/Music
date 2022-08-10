@@ -28,7 +28,7 @@ class AllTrack : Fragment(),TrackContract.TrackView {
         super.onViewCreated(view, savedInstanceState)
 
         // init presenter
-        presenter = TrackPresenterImpl(requireContext(),this)
+        presenter = TrackPresenterImpl(this)
         presenter.getList()
 
 

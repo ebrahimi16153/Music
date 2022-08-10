@@ -29,7 +29,7 @@ class AlbumMusic : Fragment(),AlbumContract.AlbumView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         StaticData.motionLayoutAlbum = binding.root
-        presenter = AlbumPresenterImpl(requireContext(),this)
+        presenter = AlbumPresenterImpl(this)
         presenter.getList()
 
        binding.listAlbum.addOnScrollListener(StaticData.recyclerAnim)

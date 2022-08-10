@@ -1,11 +1,21 @@
 package com.github.ebrahimi16153.music.data
 
 import android.annotation.SuppressLint
+import android.content.ContentUris
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
+import android.util.Size
+import androidx.annotation.RequiresApi
+import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.model.AlbumMusic
 import com.github.ebrahimi16153.music.data.model.MusicFile
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 
 class TrackListInteractor(private val context: Context) {
 
@@ -76,8 +86,10 @@ class TrackListInteractor(private val context: Context) {
             MediaStore.Audio.Albums.ALBUM_ID,
             MediaStore.Audio.Albums.ALBUM,
             MediaStore.Audio.Albums.ARTIST,
-            MediaStore.Audio.Albums.ALBUM,
-            MediaStore.Audio.Albums.NUMBER_OF_SONGS
+            MediaStore.Audio.Albums.ALBUM_ART
+
+
+
 
 
         )
@@ -88,21 +100,46 @@ class TrackListInteractor(private val context: Context) {
             projection,
             selection,
             null,
-            MediaStore.Audio.Media.ALBUM + " ASC"
+            null
         )
         val album = mutableListOf<AlbumMusic>()
+        var thumbnail:Bitmap
+        var byteArrayCover:ByteArray
+        val stream = ByteArrayOutputStream()
         if (cursor != null) {
             while (cursor.moveToNext()) {
+
+             val uri :Uri=   ContentUris.withAppendedId(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, cursor.getString(0).toLong())
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+                    try {
+                        thumbnail = context.contentResolver.loadThumbnail(
+                            uri,
+                            Size(100, 100),
+                            null
+                        )
+
+                    } catch (e: IOException) {
+                        thumbnail = BitmapFactory.decodeResource(context.resources, R.drawable.cover)
+                    }
+                }else{
+                    thumbnail = BitmapFactory.decodeFile(cursor.getString(3))
+                    if (thumbnail == null){
+                        thumbnail = BitmapFactory.decodeResource(context.resources, R.drawable.cover)
+
+                    }
+                }
+
+                thumbnail.compress(Bitmap.CompressFormat.JPEG,100,stream)
+                val cover  = stream.toByteArray()
+                thumbnail.recycle()
+
 
                 album.add(
 
                     AlbumMusic(
-                        cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-
+                        cover
                         )
                 )
             }
