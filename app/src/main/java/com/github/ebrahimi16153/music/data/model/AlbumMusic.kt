@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import java.io.ByteArrayOutputStream
 
-data class AlbumMusic(val album:String, val artist:String, val cover: ByteArray)
+data class AlbumMusic(val album:String, val artist:String, val cover:String)
 
 
 //MediaStore.Audio.Albums.ALBUM_ID,

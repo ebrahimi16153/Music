@@ -83,15 +83,8 @@ class TrackListInteractor(private val context: Context) {
         val selection = MediaStore.Audio.Media.ALBUM+ " != 0"
 
         val projection = arrayOf(
-            MediaStore.Audio.Albums.ALBUM_ID,
             MediaStore.Audio.Albums.ALBUM,
             MediaStore.Audio.Albums.ARTIST,
-            MediaStore.Audio.Albums.ALBUM_ART
-
-
-
-
-
         )
 
 
@@ -103,45 +96,21 @@ class TrackListInteractor(private val context: Context) {
             null
         )
         val album = mutableListOf<AlbumMusic>()
-        var thumbnail:Bitmap
-        var byteArrayCover:ByteArray
-        val stream = ByteArrayOutputStream()
         if (cursor != null) {
             while (cursor.moveToNext()) {
-
-             val uri :Uri=   ContentUris.withAppendedId(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, cursor.getString(0).toLong())
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                    try {
-                        thumbnail = context.contentResolver.loadThumbnail(
-                            uri,
-                            Size(100, 100),
-                            null
-                        )
-
-                    } catch (e: IOException) {
-                        thumbnail = BitmapFactory.decodeResource(context.resources, R.drawable.cover)
-                    }
-                }else{
-                    thumbnail = BitmapFactory.decodeFile(cursor.getString(3))
-                    if (thumbnail == null){
-                        thumbnail = BitmapFactory.decodeResource(context.resources, R.drawable.cover)
-
-                    }
+                val data = StaticData.musicList.find {
+                    it.albume == cursor.getString(0)
                 }
+                if (data != null) {
+                    album.add(
 
-                thumbnail.compress(Bitmap.CompressFormat.JPEG,100,stream)
-                val cover  = stream.toByteArray()
-                thumbnail.recycle()
-
-
-                album.add(
-
-                    AlbumMusic(
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cover
+                        AlbumMusic(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            data.data
                         )
-                )
+                    )
+                }
             }
         }
 
