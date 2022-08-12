@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,32 +7,18 @@
     android:id="@+id/root"
     app:nestedScrollFlags="disableScroll"
     android:background="@color/background"
-    app:layoutDescription="@xml/activity_music_list_scene"
     tools:context=".musiclist.MusicList">
 
-    <TextView
-        android:id="@+id/musicLibTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/signika"
-        android:text="@string/evol_future"
-        android:textColor="@color/text"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topMusicPlayer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:elevation="0dp"
         app:cardBackgroundColor="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/musicLibTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/musicContainerLay"
@@ -42,7 +28,7 @@
             <androidx.constraintlayout.helper.widget.Flow
                 android:id="@+id/musicContainer"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="110dp"
                 app:constraint_referenced_ids="btnFavMusicLib,cardViewCoverMusicLib,btnMoreMusicLib"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +37,8 @@
 
             <soup.neumorphism.NeumorphImageButton
                 android:id="@+id/btnFavMusicLib"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginHorizontal="20dp"
                 android:contentDescription="@string/favbtn"
                 android:padding="25dp"
@@ -66,8 +52,8 @@
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/cardViewCoverMusicLib"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:neumorph_shadowColorDark="@color/darkShadow"
                 app:neumorph_shadowColorLight="@color/lightShadow"
                 app:neumorph_shapeAppearance="@style/cover_image"
@@ -75,7 +61,7 @@
 
                 <ImageView
                     android:id="@+id/coverMusicLib"
-                    android:layout_width="173dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/covermusic"
                     android:scaleType="centerCrop"
@@ -85,8 +71,8 @@
 
             <soup.neumorphism.NeumorphImageButton
                 android:id="@+id/btnMoreMusicLib"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginHorizontal="20dp"
                 android:contentDescription="@string/morebtn"
                 android:padding="25dp"
@@ -143,4 +129,4 @@
 
 
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

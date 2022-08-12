@@ -98,7 +98,7 @@ class TrackListInteractor(private val context: Context) {
         val album = mutableListOf<AlbumMusic>()
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                val data = StaticData.musicList.find {
+                val data = StaticData.allTrack.find {
                     it.albume == cursor.getString(0)
                 }
                 if (data != null) {

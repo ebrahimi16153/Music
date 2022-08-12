@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.MusicListAdapter
 import com.github.ebrahimi16153.music.databinding.FragmentAllTrackBinding
-import com.github.ebrahimi16153.music.helper.CustomScrollListener
 
 
 class AllTrack : Fragment(),TrackContract.TrackView {
@@ -38,13 +37,11 @@ class AllTrack : Fragment(),TrackContract.TrackView {
 
         binding.apply {
             val trackAdapter = MusicListAdapter()
-            trackAdapter.diff.submitList(StaticData.musicList)
+            trackAdapter.diff.submitList(StaticData.allTrack)
             recyclerTrack.adapter = trackAdapter
             recyclerTrack.layoutManager = LinearLayoutManager(requireContext())
 
         }
-
-        binding.recyclerTrack.addOnScrollListener(StaticData.recyclerAnim)
 
 
     }

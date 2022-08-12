@@ -17,7 +17,7 @@ interface MusicListContract {
 
         fun goToPlayingNow()
         fun setTabs()
-        fun updateMetaData(musicCover:ImageView,title:TextView)
+        fun updateMetaData(musicCover:ImageView)
     }
 
 

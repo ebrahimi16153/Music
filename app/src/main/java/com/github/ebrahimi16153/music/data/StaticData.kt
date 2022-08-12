@@ -4,7 +4,7 @@ import android.media.MediaPlayer
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.github.ebrahimi16153.music.data.model.AlbumMusic
 import com.github.ebrahimi16153.music.data.model.MusicFile
-import com.github.ebrahimi16153.music.helper.CustomScrollListener
+import com.github.ebrahimi16153.music.fragment.alltrack.AllTrack
 
 class StaticData {
     companion object{
@@ -13,15 +13,11 @@ class StaticData {
         var musicList = mutableListOf<MusicFile>()
         var position = 0
         var musicCount = 0
-        var stringAlbumList = mutableListOf<String>()
+        var allTrack = mutableListOf<MusicFile>()
         var albumList = mutableListOf<AlbumMusic>()
-        val currentAlbum = mutableListOf<MusicFile>()
+        var currentAlbum = mutableListOf<MusicFile>()
         var artistList = mutableListOf<String>()
         val currentArtist = mutableListOf<MusicFile>()
-        lateinit var motionLayoutAlbum:MotionLayout
-        lateinit var motionLayoutArtist: MotionLayout
-        lateinit var motionLayout: MotionLayout
-        val recyclerAnim = CustomScrollListener()
 
 
 

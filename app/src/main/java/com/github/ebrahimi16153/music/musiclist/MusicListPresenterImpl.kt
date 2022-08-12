@@ -38,7 +38,7 @@ class MusicListPresenterImpl(
 
     }
 
-    override fun updateMetaData(musicCover: ImageView, title: TextView) {
+    override fun updateMetaData(musicCover: ImageView) {
         if (StaticData.musicList.isNotEmpty()) {
             // set coverMusic
             val mmr = MediaMetadataRetriever()
@@ -56,8 +56,6 @@ class MusicListPresenterImpl(
             }
 
             //set title
-            title.text = StaticData.musicList[StaticData.position].title
-
         }
 
     }

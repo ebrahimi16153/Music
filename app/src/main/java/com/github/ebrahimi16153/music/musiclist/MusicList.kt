@@ -27,7 +27,7 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
        // init presenter
         presenter = MusicListPresenterImpl(this,this)
         presenter.setTabs()
-        presenter.updateMetaData(binding.coverMusicLib,binding.musicLibTitle)
+        presenter.updateMetaData(binding.coverMusicLib)
 
         binding.apply {
             cardViewCoverMusicLib.setOnClickListener {
@@ -39,37 +39,16 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
 
         }
 
-        StaticData.motionLayout = binding.root
-
 
     }
 
-    override fun onBackPressed() {
 
-        if (StaticData.motionLayoutAlbum.currentState == R.id.end || StaticData.motionLayoutArtist.currentState == R.id.end) {
 
-            if (StaticData.motionLayoutAlbum.currentState == R.id.end) {
-                StaticData.apply {
-                    motionLayoutAlbum.setTransition(R.id.end, R.id.start)
-                    motionLayoutAlbum.transitionToEnd()
-                }
-            }
+    override fun onStart() {
+        super.onStart()
+        presenter.updateMetaData(binding.coverMusicLib)
+        setTabs()
 
-            if (StaticData.motionLayoutArtist.currentState == R.id.end) {
-                StaticData.apply {
-                    motionLayoutArtist.setTransition(R.id.end, R.id.start)
-                    motionLayoutArtist.transitionToEnd()
-                }
-            }
-
-        } else {
-            finish()
-        }
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        presenter.updateMetaData(binding.coverMusicLib, binding.musicLibTitle)
     }
 
     // implement tabLayout and page view

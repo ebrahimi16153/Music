@@ -6,7 +6,7 @@ import com.github.ebrahimi16153.music.data.TrackListInteractor
 
 class TrackPresenterImpl(private val view: TrackContract.TrackView):TrackContract.TrackPresenter {
     override fun getList() {
-        if (StaticData.musicList.isNotEmpty() ){
+        if (StaticData.allTrack.isNotEmpty() ){
             view.setList()
         }else{
             view.onError("Music list is Empty")

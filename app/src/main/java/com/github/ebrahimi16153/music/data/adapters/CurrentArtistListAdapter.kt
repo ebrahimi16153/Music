@@ -6,14 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ebrahimi16153.music.data.model.MusicFile
 import com.github.ebrahimi16153.music.data.StaticData
+import com.github.ebrahimi16153.music.data.model.MusicFile
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
 import com.github.ebrahimi16153.music.playingnow.PlayingNow
 
-class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
-
-
+class CurrentArtistListAdapter: RecyclerView.Adapter<CurrentArtistListAdapter.ViewHolder>() {
     //DiffUtil
     private val diffCallback = object : DiffUtil.ItemCallback<MusicFile>() {
 
@@ -54,16 +52,21 @@ class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
             binding.titleRowMusic.text = item.title
             binding.artistRowMusic.text = item.artist
             binding.root.setOnClickListener {
-                StaticData.musicList.clear()
-                StaticData.musicList.addAll(StaticData.allTrack)
-                StaticData.position = layoutPosition
-                StaticData.musicCount = StaticData.allTrack.size
-                val intent = Intent(binding.root.context,PlayingNow::class.java)
-                intent.putExtra("fromList","yes")
-                binding.root.context.startActivity(intent)
+
+                StaticData.apply {
+
+                    musicList.clear()
+                    musicList.addAll(currentArtist)
+                    position = layoutPosition
+                    musicCount = currentAlbum.size
+                    val intent = Intent(binding.root.context, PlayingNow::class.java)
+                    intent.putExtra("fromList","yes")
+                    binding.root.context.startActivity(intent)
+
+                }
+
+
             }
-
-
         }
     }
 

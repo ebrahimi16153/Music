@@ -8,6 +8,7 @@
     app:layoutDescription="@xml/fragment_album_music_scene"
     tools:context=".fragment.album.AlbumMusic">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listAlbum"
         android:layout_width="0dp"
@@ -18,19 +19,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        app:cardBackgroundColor="@color/background"
         android:id="@+id/currentAlbumLay"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:elevation="0dp"
+        app:cardBackgroundColor="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:nestedScrollingEnabled="true"
             android:id="@+id/trackCurrentAlbumList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true" />
 
     </androidx.cardview.widget.CardView>
 
