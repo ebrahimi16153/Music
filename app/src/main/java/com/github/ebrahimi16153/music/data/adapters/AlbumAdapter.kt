@@ -66,28 +66,25 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
         fun setView(item: AlbumMusic) {
             binding.albumName.text = item.album
-            getCover(item, binding.albumItemImage)
+//            getCover(item, binding.albumItemImage)
 
         }
     }
 
-        private fun getCover(item: AlbumMusic, imageView: ImageView) {
-            val mmr = MediaMetadataRetriever()
-            mmr.setDataSource(item.cover)
-            val data = mmr.embeddedPicture
-
-            if (data != null) {
-                val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
-                imageView.setImageBitmap(bitmap)
-                imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-            }else{
-                imageView.setImageResource(R.drawable.cover100)
-            }
-
-
-
-
-        }
+//        private fun getCover(item: AlbumMusic, imageView: ImageView) {
+//            val mmr = MediaMetadataRetriever()
+//            mmr.setDataSource(item.cover)
+//            val data = mmr.embeddedPicture
+//
+//            if (data != null) {
+//                val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
+//                imageView.setImageBitmap(bitmap)
+//                imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+//            }else{
+//                imageView.setImageResource(R.drawable.cover100)
+//            }
+//
+//        }
 
 
         private val differCallBack = object : DiffUtil.ItemCallback<AlbumMusic>() {

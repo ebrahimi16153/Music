@@ -116,4 +116,26 @@ class TrackListInteractor(private val context: Context) {
 
         return album
     }
+
+    fun getArtist():MutableList<String>{
+        val selection = MediaStore.Audio.Media.ARTIST + " !=0"
+        val projection = arrayOf(
+            MediaStore.Audio.Media.ARTIST
+        )
+        val cursor = context.contentResolver.query(
+            MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+            projection,
+            selection,
+            null,
+            null
+        )
+        val artist = mutableListOf<String>()
+        if (cursor!= null){
+            while (cursor.moveToNext()){
+                artist.add(cursor.getString(0))
+            }
+        }
+        return artist
+    }
+
 }

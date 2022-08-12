@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.TrackListInteractor
@@ -25,20 +26,8 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
         binding.root.addTransitionListener(this)
 
     }
-
-    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {
-
-    }
-
-    override fun onTransitionChange(
-        motionLayout: MotionLayout?,
-        startId: Int,
-        endId: Int,
-        progress: Float
-    ) {
-
-    }
-
+    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+    override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
     override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
@@ -49,17 +38,7 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
         }
 
     }
-
-    override fun onTransitionTrigger(
-        motionLayout: MotionLayout?,
-        triggerId: Int,
-        positive: Boolean,
-        progress: Float
-    ) {
-
-    }
-
-
+    override fun onTransitionTrigger(motionLayout: MotionLayout?, triggerId: Int, positive: Boolean, progress: Float) {}
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -77,15 +56,21 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
         StaticData.musicList.clear()
         StaticData.albumList.clear()
         StaticData.artistList.clear()
-        val  data = TrackListInteractor(this)
-        if ( data.getListOfMusic().isNotEmpty()){
+        val data = TrackListInteractor(this)
+        if (data.getListOfMusic().isNotEmpty()) {
             StaticData.allTrack.addAll(data.getListOfMusic())
         }
-        if (data.getAlbum().isNotEmpty()){
+        if (data.getAlbum().isNotEmpty()) {
             StaticData.albumList.addAll(data.getAlbum())
         }
+
+        if (data.getArtist().isNotEmpty()) {
+
+            StaticData.artistList.addAll(data.getArtist())
+        }
+
         startActivity(Intent(this, MusicList::class.java))
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.slide_out_right)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right)
         finish()
     }
 

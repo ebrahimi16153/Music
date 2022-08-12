@@ -58,7 +58,7 @@ class CurrentArtistListAdapter: RecyclerView.Adapter<CurrentArtistListAdapter.Vi
                     musicList.clear()
                     musicList.addAll(currentArtist)
                     position = layoutPosition
-                    musicCount = currentAlbum.size
+                    musicCount = currentArtist.size
                     val intent = Intent(binding.root.context, PlayingNow::class.java)
                     intent.putExtra("fromList","yes")
                     binding.root.context.startActivity(intent)
