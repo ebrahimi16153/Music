@@ -24,7 +24,7 @@ class AlbumMusic : Fragment(), AlbumContract.AlbumView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        back()
+
         binding = FragmentAlbumMusicBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -76,28 +76,13 @@ class AlbumMusic : Fragment(), AlbumContract.AlbumView {
         })
         binding.listAlbum.adapter = adapter
         binding.listAlbum.layoutManager = LinearLayoutManager(requireContext())
+
+        StaticData.motionLayoutAlbumMusic = binding.motionLayAlbum
     }
 
 
     override fun onError(massage: String) {
         Toast.makeText(requireContext(), massage, Toast.LENGTH_SHORT).show()
     }
-
-private fun back(){
-
-    val callBack = object :OnBackPressedCallback(true){
-        override fun handleOnBackPressed() {
-           if (binding.root.currentState == R.id.end){
-               binding.root.setTransition(R.id.end,R.id.start)
-               binding.root.transitionToEnd()
-           }else{
-               requireActivity().finish()
-           }
-        }
-
-    }
-    requireActivity().onBackPressedDispatcher.addCallback(callBack)
-
-}
 
 }

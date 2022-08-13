@@ -25,7 +25,7 @@ class MusicListPresenterImpl(
 
 
     override fun goToPlayingNow() {
-        if (StaticData.musicList.isNotEmpty()){
+        if (StaticData.allTrack.isNotEmpty()){
             context.startActivity(Intent(context, PlayingNow::class.java))
         }else{
             Toast.makeText(context, "List is empty", Toast.LENGTH_LONG).show()

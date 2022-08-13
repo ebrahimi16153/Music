@@ -40,6 +40,8 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
         }
 
 
+
+
     }
 
 
@@ -47,7 +49,6 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     override fun onStart() {
         super.onStart()
         presenter.updateMetaData(binding.coverMusicLib)
-        setTabs()
 
     }
 
@@ -78,8 +79,28 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     }
 
 
+    override fun onBackPressed() {
 
-    // set cover music
 
+
+        if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end || StaticData.motionLayoutArtist.currentState == R.id.end){
+
+            if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end){
+                StaticData.motionLayoutAlbumMusic.setTransition(R.id.end,R.id.start)
+                StaticData.motionLayoutAlbumMusic.transitionToEnd()
+            }
+            if (StaticData.motionLayoutArtist.currentState == R.id.end){
+                StaticData.motionLayoutArtist.setTransition(R.id.end,R.id.start)
+                StaticData.motionLayoutArtist.transitionToEnd()
+            }
+
+
+        }else{
+            super.onBackPressed()
+        }
+
+
+
+    }
 
 }

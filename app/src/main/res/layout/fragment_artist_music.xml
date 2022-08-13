@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/motionLayArtist"
     android:background="@color/background"
     app:layoutDescription="@xml/fragment_artist_music_scene"
     tools:context=".fragment.artist.ArtistMusic">

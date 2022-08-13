@@ -2,6 +2,7 @@ package com.github.ebrahimi16153.music.data
 
 import android.media.MediaPlayer
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.model.AlbumMusic
 import com.github.ebrahimi16153.music.data.model.MusicFile
 import com.github.ebrahimi16153.music.fragment.alltrack.AllTrack
@@ -18,6 +19,9 @@ class StaticData {
         var currentAlbum = mutableListOf<MusicFile>()
         var artistList = mutableListOf<String>()
         val currentArtist = mutableListOf<MusicFile>()
+
+        lateinit var motionLayoutAlbumMusic :MotionLayout
+        lateinit var motionLayoutArtist :MotionLayout
 
 
 

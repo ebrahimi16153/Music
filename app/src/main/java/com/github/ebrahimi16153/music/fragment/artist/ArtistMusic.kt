@@ -23,7 +23,6 @@ class ArtistMusic : Fragment(), ArtistContract.ArtistView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        back()
         binding = FragmentArtistMusicBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -68,30 +67,15 @@ class ArtistMusic : Fragment(), ArtistContract.ArtistView {
         binding.artistList.adapter = adapter
         binding.artistList.layoutManager = LinearLayoutManager(requireContext())
 
-        //set recycler artist track
+
+        StaticData.motionLayoutArtist = binding.motionLayArtist
+
 
 
     }
 
     override fun onError(massage: String) {
         Toast.makeText(requireContext(), massage, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun back(){
-
-        val callBack = object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                if (binding.root.currentState == R.id.end){
-                    binding.root.setTransition(R.id.end,R.id.start)
-                    binding.root.transitionToEnd()
-                }else{
-                    requireActivity().finish()
-                }
-            }
-
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callBack)
-
     }
 
 }
