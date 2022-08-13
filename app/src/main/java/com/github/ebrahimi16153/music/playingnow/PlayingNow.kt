@@ -1,20 +1,27 @@
 package com.github.ebrahimi16153.music.playingnow
 
+import android.content.ComponentName
+import android.content.Intent
+import android.content.ServiceConnection
 import android.graphics.BitmapFactory
+import android.graphics.Insets
 import android.media.MediaMetadataRetriever
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.os.IBinder
+import android.util.Log
 import android.widget.ImageView
 import android.widget.SeekBar
+import androidx.appcompat.app.AppCompatActivity
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.databinding.ActivityPlayingNowBinding
+import com.github.ebrahimi16153.music.notification.MusicService
 
-class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
+class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView, ServiceConnection {
     //binding
     private var flag = false
     private lateinit var binding: ActivityPlayingNowBinding
+    private lateinit var musicService: MusicService
 
     // onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +30,10 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
         setContentView(binding.root)
 
 
-
         val presenter = PlayingNowPresenterImpl(this, this)
 
         // play music
-        val key = intent.getStringExtra("fromList")?:"no"
+        val key = intent.getStringExtra("fromList") ?: "no"
         presenter.playMusic(key)
 
         //btn play
@@ -63,9 +69,25 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
 
         })
 
+
+        //notification service
+
+        val intent = Intent(this,MusicService::class.java)
+        bindService(intent,this, BIND_AUTO_CREATE)
+
     }
 
 
+    override fun onPause() {
+        super.onPause()
+        unbindService(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val intent = Intent(this,MusicService::class.java)
+        bindService(intent,this, BIND_AUTO_CREATE)
+    }
     // set play and pause BtnPLay
     override fun showBtnPlayAnimation() {
         if (StaticData.mp.isPlaying) {
@@ -125,6 +147,17 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
         }
 
         updatedSeekbar.start()
+    }
+
+    override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+        val binder: MusicService.MyBinder = service as MusicService.MyBinder
+        musicService = binder.getService()
+        Log.e("connected", "$musicService")
+    }
+
+    override fun onServiceDisconnected(name: ComponentName?) {
+        Log.e("DisConnected", "$musicService")
+
     }
 
 }
