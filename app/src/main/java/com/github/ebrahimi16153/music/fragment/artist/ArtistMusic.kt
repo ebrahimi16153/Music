@@ -15,9 +15,8 @@ import com.github.ebrahimi16153.music.data.adapters.CurrentAlbumListAdapter
 import com.github.ebrahimi16153.music.data.adapters.CurrentArtistListAdapter
 import com.github.ebrahimi16153.music.databinding.FragmentArtistMusicBinding
 
-class ArtistMusic : Fragment(), ArtistContract.ArtistView {
+class ArtistMusic : Fragment(){
     private lateinit var binding: FragmentArtistMusicBinding
-    private lateinit var presenter: ArtistContract.ArtistPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,57 +24,10 @@ class ArtistMusic : Fragment(), ArtistContract.ArtistView {
     ): View {
         binding = FragmentArtistMusicBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        presenter = ArtistPresenterImpl(this)
-//        presenter.getList()
-        setList()
-    }
-
-    override fun setList() {
-        val adapter = ArtistAdapter()
-        adapter.diff.submitList(StaticData.artistList)
-        adapter.setOnItemClickListener(object :ArtistAdapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-
-                StaticData.apply {
-                    currentArtist.clear()
-                    allTrack.forEach {
-                        if(it.artist == artistList[position]){
-                            currentArtist.add(it)
-                        }
-                    }
-                }
-
-                val adapter2 = CurrentArtistListAdapter()
-                adapter2.diff.submitList(StaticData.currentArtist)
-                binding.artistListTrack.adapter = adapter2
-                binding.artistListTrack.layoutManager = LinearLayoutManager(requireContext())
-
-
-                if (binding.root.currentState == R.id.start){
-                    binding.root.setTransition(R.id.start,R.id.end)
-                    binding.root.transitionToEnd()
-                }
-
-            }
-
-        })
-        binding.artistList.adapter = adapter
-        binding.artistList.layoutManager = LinearLayoutManager(requireContext())
-
-
-        StaticData.motionLayoutArtist = binding.motionLayArtist
-
-
 
     }
-
-    override fun onError(massage: String) {
-        Toast.makeText(requireContext(), massage, Toast.LENGTH_SHORT).show()
-    }
-
 }

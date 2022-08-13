@@ -1,47 +1,24 @@
 package com.github.ebrahimi16153.music.data.adapters
 
-import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.media.MediaMetadataRetriever
-import android.os.Build
-import android.util.Size
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ebrahimi16153.music.R
-import com.github.ebrahimi16153.music.data.StaticData
-import com.github.ebrahimi16153.music.data.model.AlbumMusic
-import com.github.ebrahimi16153.music.data.model.MusicFile
+
+import com.github.ebrahimi16153.music.data.model.Album
 import com.github.ebrahimi16153.music.databinding.AlbumItemBinding
-import java.io.IOException
-import java.lang.reflect.InvocationTargetException
+
 
 class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
 
-    // on Item Click listener
-    private lateinit var  mListener:OnItemClickListener
-
-    interface OnItemClickListener{
-        fun onItemClick(position: Int)
-    }
-
-   fun setonItemClickListener(listener:OnItemClickListener){
-               mListener = listener
-   }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(AlbumItemBinding.inflate(LayoutInflater.from(parent.context),parent,false),mListener)
+        return ViewHolder(AlbumItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -55,16 +32,9 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
 
 
-    inner class ViewHolder(private val binding: AlbumItemBinding,listener:OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: AlbumItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-      // on item click listener
-        init {
-            binding.root.setOnClickListener {
-                listener.onItemClick(adapterPosition)
-            }
-        }
-
-        fun setView(item: AlbumMusic) {
+        fun setView(item: Album) {
             binding.albumName.text = item.album
 //            getCover(item, binding.albumItemImage)
 
@@ -87,12 +57,12 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 //        }
 
 
-        private val differCallBack = object : DiffUtil.ItemCallback<AlbumMusic>() {
-            override fun areItemsTheSame(oldItem: AlbumMusic, newItem: AlbumMusic): Boolean {
+        private val differCallBack = object : DiffUtil.ItemCallback<Album>() {
+            override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: AlbumMusic, newItem: AlbumMusic): Boolean {
+            override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
                 return oldItem == newItem
             }
 

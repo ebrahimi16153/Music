@@ -3,6 +3,7 @@ package com.github.ebrahimi16153.music.data.adapters
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.databinding.RowMusicListBinding
 import com.github.ebrahimi16153.music.playingnow.PlayingNow
 
-class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
+class AllMusicAdapter : RecyclerView.Adapter<AllMusicAdapter.ViewHolder>() {
 
 
     //DiffUtil
@@ -48,16 +49,16 @@ class MusicListAdapter : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
     override fun getItemCount() = diff.currentList.size
 
 
-    class ViewHolder(private val binding: RowMusicListBinding) :
+ inner   class ViewHolder(private val binding: RowMusicListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setViews(item: MusicFile) {
             binding.titleRowMusic.text = item.title
             binding.artistRowMusic.text = item.artist
+
             binding.root.setOnClickListener {
-                StaticData.musicList.clear()
-                StaticData.musicList.addAll(StaticData.allTrack)
+                StaticData.musicList.addAll(diff.currentList)
                 StaticData.position = layoutPosition
-                StaticData.musicCount = StaticData.allTrack.size
+                StaticData.musicCount = diff.currentList.size
                 val intent = Intent(binding.root.context,PlayingNow::class.java)
                 intent.putExtra("fromList","yes")
                 binding.root.context.startActivity(intent)

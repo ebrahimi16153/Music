@@ -5,10 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.constraintlayout.motion.widget.MotionLayout
-import com.github.ebrahimi16153.music.data.StaticData
-import com.github.ebrahimi16153.music.data.TrackListInteractor
 import com.github.ebrahimi16153.music.databinding.ActivitySplashBinding
 import com.github.ebrahimi16153.music.musiclist.MusicList
 
@@ -24,6 +21,8 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
 
         // motion layout Listener
         binding.root.addTransitionListener(this)
+
+
 
     }
     override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
@@ -53,21 +52,6 @@ class Splash : AppCompatActivity(), MotionLayout.TransitionListener {
 
 
     private fun goMusicLit() {
-        StaticData.musicList.clear()
-        StaticData.albumList.clear()
-        StaticData.artistList.clear()
-        val data = TrackListInteractor(this)
-        if (data.getListOfMusic().isNotEmpty()) {
-            StaticData.allTrack.addAll(data.getListOfMusic())
-        }
-        if (data.getAlbum().isNotEmpty()) {
-            StaticData.albumList.addAll(data.getAlbum())
-        }
-
-        if (data.getArtist().isNotEmpty()) {
-
-            StaticData.artistList.addAll(data.getArtist())
-        }
 
         startActivity(Intent(this, MusicList::class.java))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right)

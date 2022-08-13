@@ -25,11 +25,11 @@ class MusicListPresenterImpl(
 
 
     override fun goToPlayingNow() {
-        if (StaticData.allTrack.isNotEmpty()){
-            context.startActivity(Intent(context, PlayingNow::class.java))
-        }else{
-            Toast.makeText(context, "List is empty", Toast.LENGTH_LONG).show()
-        }
+//        if (StaticData.allTrack.isNotEmpty()){
+//            context.startActivity(Intent(context, PlayingNow::class.java))
+//        }else{
+//            Toast.makeText(context, "List is empty", Toast.LENGTH_LONG).show()
+//        }
     }
 
     override fun setTabs() {

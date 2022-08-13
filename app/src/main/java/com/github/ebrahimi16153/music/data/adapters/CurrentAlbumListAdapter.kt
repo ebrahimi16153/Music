@@ -53,22 +53,22 @@ class CurrentAlbumListAdapter : RecyclerView.Adapter<CurrentAlbumListAdapter.Vie
         fun setViews(item: MusicFile) {
             binding.titleRowMusic.text = item.title
             binding.artistRowMusic.text = item.artist
-            binding.root.setOnClickListener {
-
-                StaticData.apply {
-
-                    musicList.clear()
-                    musicList.addAll(currentAlbum)
-                    position = layoutPosition
-                    musicCount = currentAlbum.size
-                    val intent = Intent(binding.root.context,PlayingNow::class.java)
-                    intent.putExtra("fromList","yes")
-                    binding.root.context.startActivity(intent)
-
-                }
-
-
-            }
+//            binding.root.setOnClickListener {
+//
+//                StaticData.apply {
+//
+//                    musicList.clear()
+//                    musicList.addAll(currentAlbum)
+//                    position = layoutPosition
+//                    musicCount = currentAlbum.size
+//                    val intent = Intent(binding.root.context,PlayingNow::class.java)
+//                    intent.putExtra("fromList","yes")
+//                    binding.root.context.startActivity(intent)
+//
+//                }
+//
+//
+//            }
             }
         }
     }
