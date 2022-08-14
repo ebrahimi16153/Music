@@ -56,6 +56,7 @@ class AllMusicAdapter : RecyclerView.Adapter<AllMusicAdapter.ViewHolder>() {
             binding.artistRowMusic.text = item.artist
 
             binding.root.setOnClickListener {
+                StaticData.musicList.clear()
                 StaticData.musicList.addAll(diff.currentList)
                 StaticData.position = layoutPosition
                 StaticData.musicCount = diff.currentList.size

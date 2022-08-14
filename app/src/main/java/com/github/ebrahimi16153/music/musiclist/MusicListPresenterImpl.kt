@@ -1,24 +1,33 @@
 package com.github.ebrahimi16153.music.musiclist
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
 import android.widget.ImageView
+import android.widget.Toast
 import com.github.ebrahimi16153.music.R
+import com.github.ebrahimi16153.music.data.DataInteractor
 import com.github.ebrahimi16153.music.data.StaticData
+import com.github.ebrahimi16153.music.playingnow.PlayingNow
 
-class MusicListPresenterImpl(
-    private val context: Context,
-    private val view: MusicListContract.MusicListView
+class MusicListPresenterImpl(private val context: Context, private val view: MusicListContract.MusicListView
 ) : MusicListContract.MusicListPresenter {
 
 
     override fun goToPlayingNow() {
-//        if (StaticData.allTrack.isNotEmpty()){
-//            context.startActivity(Intent(context, PlayingNow::class.java))
-//        }else{
-//            Toast.makeText(context, "List is empty", Toast.LENGTH_LONG).show()
-//        }
+           val data= DataInteractor(context)
+        if (data.getListOfMusic().isNotEmpty() && StaticData.musicList.isEmpty()){
+            StaticData.musicList.clear()
+            StaticData.musicList.addAll(data.getListOfMusic())
+            StaticData.musicCount = data.getListOfMusic().size
+            context.startActivity(Intent(context, PlayingNow::class.java))
+        }else if(StaticData.musicList.isNotEmpty()){
+            context.startActivity(Intent(context, PlayingNow::class.java))
+        }else{
+            Toast.makeText(context,"PlayList is Empty", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun setTabs() {

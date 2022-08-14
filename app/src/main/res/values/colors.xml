@@ -9,12 +9,12 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--color-->
-    <color name="background">#222831</color>
-    <color name="darkShadow">#11151b</color>
-    <color name="lightShadow">#363D44</color>
-    <color name="gradientOne">#ff0a45</color>
-    <color name="gradientTwo">#ffaf98</color>
-    <color name="text">#f6f6f6</color>
+    <color name="background">#E7F0FC</color>
+    <color name="darkShadow">#AAB8D1</color>
+    <color name="lightShadow">#F9FFFF</color>
+    <color name="gradientOne">#5981FD</color>
+    <color name="gradientTwo">#81A4FD</color>
+    <color name="text">#6A7890</color>
     <color name="blue">#1e88e5</color>
-
+// afsanehsalavati
 </resources>

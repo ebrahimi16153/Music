@@ -6,7 +6,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="300">
        <KeyFrameSet>
        </KeyFrameSet>
     </Transition>
@@ -16,23 +16,25 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/artistList"
+            android:id="@+id/listArtist"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintVertical_bias="1.0"
-            motion:layout_constraintHorizontal_bias="0.0"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:visibility="invisible" />
         <Constraint
             android:layout_height="0dp"
-            android:layout_width="0dp"
-            android:id="@+id/artistListTrackLay"
-            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:id="@+id/currentArtistLay"
             motion:layout_constraintBottom_toBottomOf="parent" />
     </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/end"
+        motion:constraintSetEnd="@+id/start"
+        motion:duration="300" />
 </MotionScene>

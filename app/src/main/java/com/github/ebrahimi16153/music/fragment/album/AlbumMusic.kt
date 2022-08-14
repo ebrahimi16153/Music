@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.DataInteractor
+import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.AlbumAdapter
 import com.github.ebrahimi16153.music.data.adapters.CurrentAlbumListAdapter
 import com.github.ebrahimi16153.music.data.model.Album
@@ -33,6 +34,7 @@ class AlbumMusic : Fragment(),AlbumMusicContract.AlbumView{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        StaticData.motionLayoutAlbumMusic = binding.motionLayAlbum
         presenter = AlbumPresenterImpl(requireContext(),this)
         presenter.setList()
 

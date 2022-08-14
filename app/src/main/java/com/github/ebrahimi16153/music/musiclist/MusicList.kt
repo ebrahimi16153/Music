@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.github.ebrahimi16153.music.R
+import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.FmPagerAdapter
 import com.github.ebrahimi16153.music.databinding.ActivityMusicListBinding
 import com.github.ebrahimi16153.music.fragment.album.AlbumMusic
@@ -78,28 +79,28 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
     }
 
 
-//    override fun onBackPressed() {
-//
-//
-//
-//        if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end || StaticData.motionLayoutArtist.currentState == R.id.end){
-//
-//            if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end){
-//                StaticData.motionLayoutAlbumMusic.setTransition(R.id.end,R.id.start)
-//                StaticData.motionLayoutAlbumMusic.transitionToEnd()
-//            }
-//            if (StaticData.motionLayoutArtist.currentState == R.id.end){
-//                StaticData.motionLayoutArtist.setTransition(R.id.end,R.id.start)
-//                StaticData.motionLayoutArtist.transitionToEnd()
-//            }
-//
-//
-//        }else{
-//            super.onBackPressed()
-//        }
-//
-//
-//
-//    }
+    override fun onBackPressed() {
+
+
+
+        if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end || StaticData.motionLayoutArtist.currentState == R.id.end){
+
+            if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end){
+                StaticData.motionLayoutAlbumMusic.setTransition(R.id.end,R.id.start)
+                StaticData.motionLayoutAlbumMusic.transitionToEnd()
+            }
+            if (StaticData.motionLayoutArtist.currentState == R.id.end){
+                StaticData.motionLayoutArtist.setTransition(R.id.end,R.id.start)
+                StaticData.motionLayoutArtist.transitionToEnd()
+            }
+
+
+        }else{
+            super.onBackPressed()
+        }
+
+
+
+    }
 
 }

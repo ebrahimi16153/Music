@@ -2,11 +2,11 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayArtist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/motionLayArtist"
     android:background="@color/background"
-    app:layoutDescription="@xml/fragment_album_music_scene"
+    app:layoutDescription="@xml/fragment_artist_music_scene"
     tools:context=".fragment.artists.ArtistMusic">
 
 
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/currentAlbumLay"
+        android:id="@+id/currentArtistLay"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="0dp"
@@ -33,7 +33,8 @@
             android:id="@+id/trackCurrentArtistList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nestedScrollingEnabled="true" />
+            android:nestedScrollingEnabled="true"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.cardview.widget.CardView>
 
