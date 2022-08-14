@@ -24,5 +24,7 @@
     <string name="musiclibrytabs">MusicLibryTabs</string>
     <string name="colors_halsey_2020_usa">Colors halsey 2020 usa</string>
     <string name="eminem">Eminem</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

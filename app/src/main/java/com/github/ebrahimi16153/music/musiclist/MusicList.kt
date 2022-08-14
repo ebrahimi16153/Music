@@ -5,12 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.github.ebrahimi16153.music.R
-import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.data.adapters.FmPagerAdapter
 import com.github.ebrahimi16153.music.databinding.ActivityMusicListBinding
 import com.github.ebrahimi16153.music.fragment.album.AlbumMusic
 import com.github.ebrahimi16153.music.fragment.alltrack.AllTrack
-import com.github.ebrahimi16153.music.fragment.artist.ArtistMusic
+import com.github.ebrahimi16153.music.fragment.artists.ArtistMusic
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MusicList : AppCompatActivity(), MusicListContract.MusicListView {

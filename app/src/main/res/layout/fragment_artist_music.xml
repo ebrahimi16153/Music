@@ -6,36 +6,35 @@
     android:layout_height="match_parent"
     android:id="@+id/motionLayArtist"
     android:background="@color/background"
-    app:layoutDescription="@xml/fragment_artist_music_scene"
-    tools:context=".fragment.artist.ArtistMusic">
+    app:layoutDescription="@xml/fragment_album_music_scene"
+    tools:context=".fragment.artists.ArtistMusic">
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/artistList"
+        android:id="@+id/listArtist"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/artistListTrackLay"
+        android:id="@+id/currentAlbumLay"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:elevation="0dp"
         app:cardBackgroundColor="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent">
 
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/artistListTrack"
+            android:id="@+id/trackCurrentArtistList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true" />
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

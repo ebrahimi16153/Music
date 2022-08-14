@@ -1,22 +1,11 @@
 package com.github.ebrahimi16153.music.musiclist
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData
-import com.github.ebrahimi16153.music.data.adapters.FmPagerAdapter
-import com.github.ebrahimi16153.music.fragment.album.AlbumMusic
-import com.github.ebrahimi16153.music.fragment.alltrack.AllTrack
-import com.github.ebrahimi16153.music.fragment.artist.ArtistMusic
-import com.github.ebrahimi16153.music.playingnow.PlayingNow
-import com.google.android.material.tabs.TabLayoutMediator
 
 class MusicListPresenterImpl(
     private val context: Context,

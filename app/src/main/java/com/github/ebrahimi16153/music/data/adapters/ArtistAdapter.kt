@@ -9,16 +9,16 @@ import com.github.ebrahimi16153.music.databinding.ArtistItemBinding
 
 class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
-    //onItemClickLister
-    private lateinit var mListener:OnItemClickListener
-
-    interface OnItemClickListener{
-        fun onItemClick(position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener){
-        mListener = listener
-    }
+//    //onItemClickLister
+//    private lateinit var mListener:OnItemClickListener
+//
+//    interface OnItemClickListener{
+//        fun onItemClick(position: Int)
+//    }
+//
+//    fun setOnItemClickListener(listener: OnItemClickListener){
+//        mListener = listener
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -27,7 +27,7 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ),mListener
+            )
         )
     }
 
@@ -37,16 +37,16 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     override fun getItemCount() =diff.currentList.size
 
-    inner class ViewHolder(val binding: ArtistItemBinding,listener: OnItemClickListener) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ArtistItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setViews(item: String) {
             binding.artistName.text = item
         }
 
-        init {
-            binding.root.setOnClickListener {
-                listener.onItemClick(adapterPosition)
-            }
-        }
+//        init {
+//            binding.root.setOnClickListener {
+//                listener.onItemClick(adapterPosition)
+//            }
+//        }
 
     }
 

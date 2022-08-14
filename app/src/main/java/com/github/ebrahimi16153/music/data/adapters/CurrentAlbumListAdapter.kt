@@ -48,11 +48,24 @@ class CurrentAlbumListAdapter : RecyclerView.Adapter<CurrentAlbumListAdapter.Vie
     override fun getItemCount() = diff.currentList.size
 
 
-    class ViewHolder(private val binding: RowMusicListBinding) :
+    inner class ViewHolder(private val binding: RowMusicListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setViews(item: MusicFile) {
             binding.titleRowMusic.text = item.title
             binding.artistRowMusic.text = item.artist
+
+            binding.root.setOnClickListener {
+                StaticData.musicList.clear()
+                StaticData.musicList .addAll(diff.currentList)
+                StaticData.musicCount = diff.currentList.size
+                StaticData.position = layoutPosition
+                val intent = Intent(binding.root.context,PlayingNow::class.java)
+                intent.putExtra("fromList","yes")
+                binding.root.context.startActivity(intent)
+
+            }
+
+
 //            binding.root.setOnClickListener {
 //
 //                StaticData.apply {
