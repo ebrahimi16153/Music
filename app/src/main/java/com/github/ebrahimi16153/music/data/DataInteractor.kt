@@ -1,10 +1,15 @@
 package com.github.ebrahimi16153.music.data
 
 import android.annotation.SuppressLint
+import android.content.ContentUris
 import android.content.Context
+import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
+import androidx.annotation.RequiresApi
 import com.github.ebrahimi16153.music.data.model.Album
 import com.github.ebrahimi16153.music.data.model.MusicFile
+
 
 class DataInteractor(private val context: Context) {
 
@@ -66,6 +71,8 @@ class DataInteractor(private val context: Context) {
         val projection = arrayOf(
             MediaStore.Audio.Albums.ALBUM,
             MediaStore.Audio.Albums.ARTIST,
+            MediaStore.Audio.Albums._ID,
+
         )
 
 
@@ -83,6 +90,7 @@ class DataInteractor(private val context: Context) {
                     Album(
                         cursor.getString(0),
                         cursor.getString(1),
+                        cursor.getString(2),
                     )
                 )
             }
@@ -115,5 +123,15 @@ class DataInteractor(private val context: Context) {
         }
         return artist
     }
+
+
+    fun getUri(albumID: String): Uri {
+        return ContentUris.withAppendedId(
+            MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+            //                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            albumID.toLong()
+        )
+    }
+
 
 }

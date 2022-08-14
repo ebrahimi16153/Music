@@ -1,14 +1,17 @@
 package com.github.ebrahimi16153.music.data.adapters
 
 
+import android.os.Build
+import android.provider.MediaStore
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.DataInteractor
-
 import com.github.ebrahimi16153.music.data.model.Album
 import com.github.ebrahimi16153.music.databinding.AlbumItemBinding
 
@@ -30,9 +33,15 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setView(diff.currentList[position])
+
     }
 
     override fun getItemCount() = diff.currentList.size
+
+
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+    }
 
 
 
@@ -47,29 +56,29 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
                 listener.onItemClick(adapterPosition)
             }
         }
-        
+
         fun setView(item: Album) {
             binding.albumName.text = item.album
+            val data= DataInteractor(binding.root.context)
+            val uri = data.getUri(item.albumId)
 
-//            getCover(item, binding.albumItemImage)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
 
+                try {
+
+                    val img = binding.root.context.contentResolver.loadThumbnail(uri, Size(200,200),null)
+                    binding.albumItemImage.setImageBitmap(img)
+                }catch (e:Exception){
+                    binding.albumItemImage.setImageResource(R.drawable.cover100)
+                }
+            }
         }
+
+
+
     }
 
-//        private fun getCover(item: AlbumMusic, imageView: ImageView) {
-//            val mmr = MediaMetadataRetriever()
-//            mmr.setDataSource(item.cover)
-//            val data = mmr.embeddedPicture
-//
-//            if (data != null) {
-//                val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
-//                imageView.setImageBitmap(bitmap)
-//                imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-//            }else{
-//                imageView.setImageResource(R.drawable.cover100)
-//            }
-//
-//        }
+
 
 
         private val differCallBack = object : DiffUtil.ItemCallback<Album>() {
