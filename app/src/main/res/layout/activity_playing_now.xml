@@ -301,7 +301,7 @@
             app:layout_constraintEnd_toEndOf="@id/btnPlay"
             app:layout_constraintStart_toStartOf="@id/btnPlay"
             app:layout_constraintTop_toTopOf="@id/btnPlay"
-            app:tint="@color/text" />
+            app:tint="#f6f6f6" />
 
 
 

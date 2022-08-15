@@ -14,11 +14,11 @@ class StaticData {
         lateinit var motionLayoutAlbumMusic: MotionLayout
         lateinit var motionLayoutArtist: MotionLayout
 
-        val CAHANNEL_ID_1: String = "CHANNEL_1"
-        val CAHANNEL_ID_2: String = "CHANNEL_2"
-        val ACTION_NEXT: String = "NEXT"
-        val ACTION_PLAY: String = "PLAY"
-        val ACTION_PREV: String = "PREVIOUS"
+        const val CAHANNEL_ID_1: String = "CHANNEL_1"
+        const val CAHANNEL_ID_2: String = "CHANNEL_2"
+        const val ACTION_NEXT: String = "NEXT"
+        const val ACTION_PLAY: String = "PLAY"
+        const val ACTION_PREV: String = "PREVIOUS"
 
     }
 }

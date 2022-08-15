@@ -23,7 +23,7 @@ class PlayingNowPresenterImpl(
 
             }else if (!mp.isPlaying && fromList == "yes") {
                 mp = MediaPlayer.create(context, Uri.parse(musicList[position].data))
-                mp.start()
+
             }
             view.updateMeta()
             view.updateSeekBar()

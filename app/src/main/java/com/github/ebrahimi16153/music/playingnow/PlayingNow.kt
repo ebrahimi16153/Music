@@ -1,27 +1,35 @@
 package com.github.ebrahimi16153.music.playingnow
 
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Insets
 import android.media.MediaMetadataRetriever
+import android.os.Binder
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.databinding.ActivityPlayingNowBinding
 import com.github.ebrahimi16153.music.notification.MusicService
+import com.github.ebrahimi16153.music.notification.NotificationReceiver
 
 class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView, ServiceConnection {
     //binding
     private var flag = false
     private lateinit var binding: ActivityPlayingNowBinding
     private lateinit var musicService: MusicService
+    private lateinit var  mediaSession:MediaSessionCompat
 
     // onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,24 +39,31 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView, Servi
 
 
         val presenter = PlayingNowPresenterImpl(this, this)
+        mediaSession = MediaSessionCompat(this,"Music Player")
 
         // play music
         val key = intent.getStringExtra("fromList") ?: "no"
         presenter.playMusic(key)
 
+
         //btn play
         binding.btnPlay.setOnClickListener {
             presenter.btnPlayMusic(this)
+            showNotification(R.drawable.ic_round_play_arrow_24,StaticData.musicList[StaticData.position].data)
         }
 
         //btn next
         binding.btnNext.setOnClickListener {
             presenter.btnNextMusic()
+            showNotification(R.drawable.ic_round_play_arrow_24,StaticData.musicList[StaticData.position].data)
+
         }
 
         //btn previous
         binding.btnPrevious.setOnClickListener {
             presenter.btnPreviousMusic()
+            showNotification(R.drawable.ic_round_play_arrow_24,StaticData.musicList[StaticData.position].data)
+
         }
 
         // seekbar change listener
@@ -72,8 +87,7 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView, Servi
 
         //notification service
 
-        val intent = Intent(this,MusicService::class.java)
-        bindService(intent,this, BIND_AUTO_CREATE)
+
 
     }
 
@@ -159,5 +173,75 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView, Servi
         Log.e("DisConnected", "$musicService")
 
     }
+
+
+    fun  showNotification(playPauseButton:Int,path:String){
+
+
+
+
+
+
+//        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.q){
+//
+//
+//
+//
+//
+//        }
+
+
+        val intent = Intent(this,PlayingNow::class.java)
+        val contentIntent = PendingIntent.getActivities(this,0, arrayOf(intent),PendingIntent.FLAG_IMMUTABLE)
+
+
+
+        val prevIntent = Intent(this,NotificationReceiver::class.java).setAction(StaticData.ACTION_PREV)
+        val prevPendingIntent = PendingIntent.getBroadcast(this,0,prevIntent, PendingIntent.FLAG_IMMUTABLE)
+
+
+        val playIntent = Intent(this,NotificationReceiver::class.java).setAction(StaticData.ACTION_PLAY)
+        val playPendingIntent = PendingIntent.getBroadcast(this,0,playIntent, PendingIntent.FLAG_IMMUTABLE )
+
+        val nextIntent = Intent(this,NotificationReceiver::class.java).setAction(StaticData.ACTION_NEXT)
+        val nextPendingIntent = PendingIntent.getBroadcast(this,0,nextIntent, PendingIntent.FLAG_IMMUTABLE)
+
+
+
+        val notification = NotificationCompat.Builder(this,StaticData.CAHANNEL_ID_1)
+            .setSmallIcon(R.mipmap.adaptive_icon_foreground)
+            .setLargeIcon(getCover(path))
+            .setContentTitle(binding.musicTitle.text)
+            .setContentText(binding.musicArtist.text)
+            .addAction(R.drawable.ic_round_fast_rewind_24,"Previous",prevPendingIntent)
+            .addAction(playPauseButton,"play",playPendingIntent)
+            .addAction(R.drawable.ic_round_fast_forward_24,"Next",nextPendingIntent)
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(mediaSession.sessionToken))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(contentIntent)
+            .setSilent(true)
+            .build()
+
+        val notificationManager:NotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(0,notification)
+
+
+
+
+        getCover(path)
+    }
+
+    private fun getCover(path: String):Bitmap {
+        val mmr = MediaMetadataRetriever()
+        mmr.setDataSource(path)
+        val data = mmr.embeddedPicture
+        return if (data != null) {
+            BitmapFactory.decodeByteArray(data, 0, data.size)
+        } else {
+
+            BitmapFactory.decodeResource(resources, R.drawable.cover)
+        }
+    }
+
 
 }
