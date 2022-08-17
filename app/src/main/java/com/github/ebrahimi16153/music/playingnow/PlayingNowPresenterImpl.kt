@@ -23,7 +23,7 @@ class PlayingNowPresenterImpl(
 
             }else if (!mp.isPlaying && fromList == "yes") {
                 mp = MediaPlayer.create(context, Uri.parse(musicList[position].data))
-
+                mp.start()
             }
             view.updateMeta()
             view.updateSeekBar()
@@ -35,7 +35,7 @@ class PlayingNowPresenterImpl(
 
 
     // button play
-    override fun btnPlayMusic(context: Context) {
+    override fun btnPlayMusic() {
         StaticData.apply {
 
 
@@ -92,6 +92,10 @@ class PlayingNowPresenterImpl(
             btnNextMusic()
             autoNextMusic()
         }
+    }
+
+    override fun back() {
+        view.back()
     }
 
 

@@ -18,17 +18,17 @@ class Notification :Application() {
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
 
            val notificationChannel1 = NotificationChannel(StaticData.CAHANNEL_ID_1,
-           "channel(1)",NotificationManager.IMPORTANCE_HIGH)
-           notificationChannel1.description = "Channel 1 Description"
+           "Music Player Notification",NotificationManager.IMPORTANCE_HIGH)
+           notificationChannel1.description = "Music Control"
 
-           val notificationChannel2 = NotificationChannel(StaticData.CAHANNEL_ID_2,
-           "Channel(2)",NotificationManager.IMPORTANCE_HIGH)
-           notificationChannel2.description = "Channel 2 Description"
+//           val notificationChannel2 = NotificationChannel(StaticData.CAHANNEL_ID_2,
+//           "Channel(2)",NotificationManager.IMPORTANCE_HIGH)
+//           notificationChannel2.description = "Channel 2 Description"
 
            val notificationManager = getSystemService(NotificationManager::class.java)
 
            notificationManager.createNotificationChannel(notificationChannel1)
-           notificationManager.createNotificationChannel(notificationChannel2)
+//           notificationManager.createNotificationChannel(notificationChannel2)
 
 
        }

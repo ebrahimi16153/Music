@@ -11,15 +11,17 @@ interface PlayingNowContract {
         fun updateMeta()
         fun setCoverMusic()
         fun updateSeekBar()
+        fun back()
     }
 
     interface PlayingNowPresenter {
 
         fun playMusic(fromList:String)
-        fun btnPlayMusic(context: Context)
+        fun btnPlayMusic()
         fun btnNextMusic()
         fun btnPreviousMusic()
         fun autoNextMusic()
+        fun back()
 
     }
 
