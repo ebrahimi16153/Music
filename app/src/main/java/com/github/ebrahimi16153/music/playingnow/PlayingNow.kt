@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
+import android.view.KeyEvent
 import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,11 @@ import androidx.core.app.NotificationCompat
 import com.github.ebrahimi16153.music.R
 import com.github.ebrahimi16153.music.data.StaticData
 import com.github.ebrahimi16153.music.databinding.ActivityPlayingNowBinding
+import com.github.ebrahimi16153.music.musiclist.MusicList
 import com.github.ebrahimi16153.music.notification.NotificationReceiver
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 
 class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
     //binding
@@ -33,57 +38,61 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
         setContentView(binding.root)
 
 
-        presenter = PlayingNowPresenterImpl(this, this)
-        StaticData.presenter = presenter
-        mediaSession = MediaSessionCompat(this, "Music")
+        if (StaticData.musicList.size != 0){
+            presenter = PlayingNowPresenterImpl(this, this)
+            StaticData.presenter = presenter
+            mediaSession = MediaSessionCompat(this, "Music")
 
-        // play music
-        val key = intent.getStringExtra("fromList") ?: "no"
-        presenter.playMusic(key)
+            // play music
+            val key = intent.getStringExtra("fromList") ?: "no"
+            presenter.playMusic(key)
 
 
-        //btn play
-        binding.btnPlay.setOnClickListener {
-            presenter.btnPlayMusic()
-
-        }
-
-        //btn next
-        binding.btnNext.setOnClickListener {
-            presenter.btnNextMusic()
-
-        }
-
-        //btn previous
-        binding.btnPrevious.setOnClickListener {
-            presenter.btnPreviousMusic()
-
-        }
-
-        // seekbar change listener
-        binding.progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+            //btn play
+            binding.btnPlay.setOnClickListener {
+                presenter.btnPlayMusic()
 
             }
 
-            override fun onStartTrackingTouch(p0: SeekBar?) {
+            //btn next
+            binding.btnNext.setOnClickListener {
+                presenter.btnNextMusic()
 
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                if (seekBar != null) {
-                    StaticData.mp.seekTo(seekBar.progress)
+            //btn previous
+            binding.btnPrevious.setOnClickListener {
+                presenter.btnPreviousMusic()
+
+            }
+
+            // seekbar change listener
+            binding.progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+
                 }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {
+
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    if (seekBar != null) {
+                        StaticData.mp.seekTo(seekBar.progress)
+                    }
+                }
+
+            })
+
+            // btn back
+
+            binding.btnBack.setOnClickListener {
+                presenter.back()
             }
-
-        })
-
-        // btn back
-
-        binding.btnBack.setOnClickListener {
-            presenter.back()
+        }else{
+            startActivity(Intent(this,MusicList::class.java))
+            finish()
         }
-
 
     }
 
@@ -175,7 +184,9 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
     private fun showNotification(playPauseButton: Int, path: String) {
 
 
-        val intent = Intent(this, PlayingNow::class.java)
+         val intent = Intent(this,PlayingNow::class.java)
+
+
         val contentIntent =
             PendingIntent.getActivities(this, 0, arrayOf(intent), PendingIntent.FLAG_IMMUTABLE)
 
@@ -187,11 +198,13 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
 
         val playIntent =
             Intent(this, NotificationReceiver::class.java).setAction(StaticData.ACTION_PLAY)
-        val playPendingIntent = PendingIntent.getBroadcast(this,0,playIntent, PendingIntent.FLAG_IMMUTABLE )
+        val playPendingIntent =
+            PendingIntent.getBroadcast(this, 0, playIntent, PendingIntent.FLAG_IMMUTABLE)
 
-        val nextIntent = Intent(this,NotificationReceiver::class.java).setAction(StaticData.ACTION_NEXT)
-        val nextPendingIntent = PendingIntent.getBroadcast(this,0,nextIntent, PendingIntent.FLAG_IMMUTABLE)
-
+        val nextIntent =
+            Intent(this, NotificationReceiver::class.java).setAction(StaticData.ACTION_NEXT)
+        val nextPendingIntent =
+            PendingIntent.getBroadcast(this, 0, nextIntent, PendingIntent.FLAG_IMMUTABLE)
 
 
         val notification = NotificationCompat.Builder(this, StaticData.CAHANNEL_ID_1)
@@ -205,20 +218,19 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
             .setStyle(
                 androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(1)
             )
-//            .setStyle(androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(mediaSession.sessionToken))
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+//            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(contentIntent)
             .setSilent(true)
             .setShowWhen(false)
             .build()
 
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(0,notification)
+        notificationManager.notify(0, notification)
 
 
     }
 
-    private fun getCover(path: String):Bitmap {
+    private fun getCover(path: String): Bitmap {
         val mmr = MediaMetadataRetriever()
         mmr.setDataSource(path)
         val data = mmr.embeddedPicture
@@ -230,8 +242,5 @@ class PlayingNow : AppCompatActivity(), PlayingNowContract.PlayingNowView {
         }
     }
 
-    override fun onDestroy() {
-        notificationManager.cancel(0)
-        super.onDestroy()
-    }
+
 }

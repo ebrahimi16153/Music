@@ -40,9 +40,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <service android:name=".notification.MusicService" android:enabled="true"/>
         <receiver android:name=".notification.NotificationReceiver" android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="PLAY"/>
                 <action android:name="PREVIOS"/>

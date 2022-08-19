@@ -36,12 +36,7 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
             musicContainer.setOnClickListener {
                 presenter.goToPlayingNow()
             }
-
         }
-
-
-
-
     }
 
 
@@ -81,23 +76,29 @@ class MusicList : AppCompatActivity(), MusicListContract.MusicListView {
 
     override fun onBackPressed() {
 
+        try {
+            StaticData.apply {
+                if (motionLayoutAlbumMusic.currentState == R.id.end || motionLayoutArtist.currentState == R.id.end){
+
+                    if (motionLayoutAlbumMusic.currentState == R.id.end){
+                        motionLayoutAlbumMusic.setTransition(R.id.end,R.id.start)
+                        motionLayoutAlbumMusic.transitionToEnd()
+                    }
+                    if (motionLayoutArtist.currentState == R.id.end){
+                        motionLayoutArtist.setTransition(R.id.end,R.id.start)
+                        motionLayoutArtist.transitionToEnd()
+                    }
 
 
-        if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end || StaticData.motionLayoutArtist.currentState == R.id.end){
-
-            if (StaticData.motionLayoutAlbumMusic.currentState == R.id.end){
-                StaticData.motionLayoutAlbumMusic.setTransition(R.id.end,R.id.start)
-                StaticData.motionLayoutAlbumMusic.transitionToEnd()
+                }else{
+                    super.onBackPressed()
+                }
             }
-            if (StaticData.motionLayoutArtist.currentState == R.id.end){
-                StaticData.motionLayoutArtist.setTransition(R.id.end,R.id.start)
-                StaticData.motionLayoutArtist.transitionToEnd()
-            }
-
-
-        }else{
+        }catch (e:UninitializedPropertyAccessException){
             super.onBackPressed()
         }
+
+
 
 
 
